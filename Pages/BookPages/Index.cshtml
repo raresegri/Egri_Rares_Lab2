@@ -1,5 +1,5 @@
 
-@page
+@page "/"
 @model Egri_Rares_Lab2.Pages.BookPages.IndexModel
 
 @{
@@ -49,13 +49,20 @@
                 @Html.DisplayNameFor(model => model.Book[0].PublishingDate)
             </th>
             <th>Publisher</th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].BookCategories)
+            </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Book)
-        {
-            <tr>
+        @foreach (var item in Model.BookD.Books)
+{
+            string selectedRow = "";
+            if (item.ID == Model.BookID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
                 <td>
                     @Html.DisplayFor(modelItem => item.title)
                 </td>
@@ -72,6 +79,15 @@
                 </td>
                 <td>
                     @(item.Publisher?.PublisherName ?? "Nespecificat")
+                </td>
+                <td>
+                    @{
+                        foreach (var category in item.BookCategories)
+                        {
+                            @category.Category.ID
+                            @: @category.Category.CategoryName <br />
+                        }
+                    }
                 </td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
