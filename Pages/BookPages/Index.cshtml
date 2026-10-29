@@ -8,30 +8,19 @@
 
 <h1>Books</h1>
 
-<p>
-
     
-<form method="get" class="mb-3">
-    <label asp-for="SelectedAuthorID" class="form-label">
-        Selectează autorul:
-    </label>
+<form asp - page ="./Index" method ="get">
+    <div class="form - actions no - color">
+        <p>
+            Find by Book Title / Author Name:
+            <input type="text" name="SearchString" value=" @Model.CurrentFilter " />
+            <input type="submit" value="Search" class="btn btn - primary" /> |
+            <a asp - page="./Index"> Back to full List </a>
+        </p>
+    </div >
+</form >
 
-    <select asp-for="SelectedAuthorID"
-            asp-items="Model.AuthorsOptions"
-            class="form-select">
-        <option value="">-- Toți autorii --</option>
-    </select>
-
-    <button type="submit" class="btn btn-primary mt-2">
-        Filtrează
-    </button>
-
-    <a asp-page="./Index" class="btn btn-secondary mt-2">
-        Resetează
-    </a>
-</form>
-
-
+<p>
     <a asp-page="Create">Create New</a>
 </p>
 
@@ -39,21 +28,30 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Book[0].title)
+                <a asp-page="./Index"
+                   asp-route-sortOrder="@Model.TitleSort">
+                    @Html.DisplayNameFor(model => model.Book[0].title)
+                </a>
             </th>
-            <th>Author</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].Authors)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Book[0].Price)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Book[0].PublishingDate)
             </th>
-            <th>Publisher</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].Publisher)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Book[0].BookCategories)
             </th>
+            <th>Actions</th>
         </tr>
     </thead>
+
     <tbody>
         @foreach (var item in Model.BookD.Books)
 {
