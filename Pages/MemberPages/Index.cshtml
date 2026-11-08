@@ -1,0 +1,82 @@
+@page
+@model Egri_Rares_Lab2.Pages.MemberPages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Members</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Member[0].FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Member[0].LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Member[0].Adress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Member[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Member[0].Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Member[0].FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Member[0].Borrowings)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Member) {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Adress)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.FullName)
+            </td>
+            <td>
+                    @if (item.Borrowings != null && item.Borrowings.Any())
+                    {
+                        @foreach (var borrowing in item.Borrowings)
+                        {
+                            <div>
+                                @(borrowing.Book?.title ?? "Unknown book")
+                                - Return date: @borrowing.ReturnDate.ToShortDateString()
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <span>No borrowings</span>
+                    }
+                </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

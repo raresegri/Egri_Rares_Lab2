@@ -8,4 +8,6 @@ public class Egri_Rares_Lab2Context(DbContextOptions<Egri_Rares_Lab2Context> opt
     public DbSet<Egri_Rares_Lab2.Models.Category> Category { get; set; } = default!;
     public DbSet<Egri_Rares_Lab2.Models.BookCategory> BookCategory { get; set; } = default!;
     public DbSet<Egri_Rares_Lab2.Models.AssignedCategoryData> AssignedCategoryData { get; set; } = default!;
+    public DbSet<Egri_Rares_Lab2.Models.Member> Member { get; set; } = default!;
+    public DbSet<Egri_Rares_Lab2.Models.Borrowing> Borrowing { get; set; } = default!;
 }
